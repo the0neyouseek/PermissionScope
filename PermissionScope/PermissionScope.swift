@@ -26,39 +26,39 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     // MARK: UI Parameters
     
     /// Header UILabel with the message "Hey, listen!" by default.
-    public var headerLabel                 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+    @objc public var headerLabel                 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
     /// Header UILabel with the message "We need a couple things\r\nbefore you get started." by default.
-    public var bodyLabel                   = UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 70))
+    @objc public var bodyLabel                   = UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 70))
     /// Color for the close button's text color.
-    public var closeButtonTextColor        = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
+    @objc public var closeButtonTextColor        = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
     /// Color for the permission buttons' text color.
-    public var permissionButtonTextColor   = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
+    @objc public var permissionButtonTextColor   = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
     /// Color for the permission buttons' border color.
-    public var permissionButtonBorderColor = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
+    @objc public var permissionButtonBorderColor = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
     /// Width for the permission buttons.
-    public var permissionButtonBorderWidth  : CGFloat = 1
+    @objc public var permissionButtonBorderWidth  : CGFloat = 1
     /// Corner radius for the permission buttons.
-    public var permissionButtonCornerRadius : CGFloat = 6
+    @objc public var permissionButtonCornerRadius : CGFloat = 6
     /// Color for the permission labels' text color.
-    public var permissionLabelColor:UIColor = .black
+    @objc public var permissionLabelColor:UIColor = .black
     /// Font used for all the UIButtons
-    public var buttonFont:UIFont            = .boldSystemFont(ofSize: 14)
+    @objc public var buttonFont:UIFont            = .boldSystemFont(ofSize: 14)
     /// Font used for all the UILabels
-    public var labelFont:UIFont             = .systemFont(ofSize: 14)
+    @objc public var labelFont:UIFont             = .systemFont(ofSize: 14)
     /// Close button. By default in the top right corner.
-    public var closeButton                  = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 32))
+    @objc public var closeButton                  = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 32))
     /// Offset used to position the Close button.
-    public var closeOffset                  = CGSize.zero
+    @objc public var closeOffset                  = CGSize.zero
     /// Color used for permission buttons with authorized status
-    public var authorizedButtonColor        = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
+    @objc public var authorizedButtonColor        = UIColor(red: 0, green: 0.47, blue: 1, alpha: 1)
     /// Color used for permission buttons with unauthorized status. By default, inverse of `authorizedButtonColor`.
-    public var unauthorizedButtonColor:UIColor?
+    @objc public var unauthorizedButtonColor:UIColor?
     /// Messages for the body label of the dialog presented when requesting access.
     lazy var permissionMessages: [PermissionType : String] = [PermissionType : String]()
     
     // MARK: View hierarchy for custom alert
     let baseView    = UIView()
-    public let contentView = UIView()
+    @objc public let contentView = UIView()
 
     // MARK: - Various lazy managers
     lazy var locationManager:CLLocationManager = {
@@ -93,14 +93,14 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
 	// Useful for direct use of the request* methods
     
     /// Callback called when permissions status change.
-    public var onAuthChange: authClosureType? = nil
+    @objc public var onAuthChange: authClosureType? = nil
     /// Callback called when the user taps on the close button.
-    public var onCancel: cancelClosureType?   = nil
+    @objc public var onCancel: cancelClosureType?   = nil
     
     /// Called when the user has disabled or denied access to notifications, and we're presenting them with a help dialog.
-    public var onDisabledOrDenied: cancelClosureType? = nil
+    @objc public var onDisabledOrDenied: cancelClosureType? = nil
 	/// View controller to be used when presenting alerts. Defaults to self. You'll want to set this if you are calling the `request*` methods directly.
-	public var viewControllerForAlerts : UIViewController?
+	@objc public var viewControllerForAlerts : UIViewController?
 
     /**
     Checks whether all the configured permission are authorized or not.
@@ -150,7 +150,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     
     - parameter backgroundTapCancels: True if a tap on the background should trigger the dialog dismissal.
     */
-    public init(backgroundTapCancels: Bool) {
+    @objc public init(backgroundTapCancels: Bool) {
         super.init(nibName: nil, bundle: nil)
 
 		viewControllerForAlerts = self
@@ -296,7 +296,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     /**
     Adds a permission configuration to PermissionScope.
     
-    - parameter config: Configuration for a specific permission.
+    - parameter permission: Configuration for a specific permission.
     - parameter message: Body label's text on the presented dialog when requesting access.
     */
     @objc public func addPermission(_ permission: Permission, message: String) {
@@ -469,7 +469,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     
     - returns: Permission status for the requested type.
     */
-    public func statusLocationInUse() -> PermissionStatus {
+    @objc public func statusLocationInUse() -> PermissionStatus {
         guard CLLocationManager.locationServicesEnabled() else { return .disabled }
         
         let status = CLLocationManager.authorizationStatus()
